@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "383915825008",
+    "project_id": "proyecto-foro-final",
+    "storage_bucket": "proyecto-foro-final.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383915825008:android:04c68a3b17ec0bc82b61b5",
+        "android_client_info": {
+          "package_name": "com.rnavarro.forofinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383915825008-t0mspss8le4ac62pmm120jtst25p7g74.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJex1EX1D0ubie-CrZehSoAfN1FcUFOs0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383915825008-t0mspss8le4ac62pmm120jtst25p7g74.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
