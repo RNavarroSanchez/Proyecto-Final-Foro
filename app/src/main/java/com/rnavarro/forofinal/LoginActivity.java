@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity
             startMain();
 
             //Con esta accion estamos haciendo que si ya estamos logueados, nos vuelva a pedir los datos, si quitamos el comentario de startMain(); entraria directo a MainActivity
-//            mAuth.signOut();
+            //mAuth.signOut();
         }
 
     }
