@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-
        FloatingActionButton btaddforo= findViewById(R.id.AddForo);
 
         btaddforo.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setView(view);
 
                 etNombreforo= view.findViewById(R.id.et_nameforo);
-                
+
                     builder.setPositiveButton("añadir", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

@@ -1,6 +1,7 @@
 package com.rnavarro.forofinal.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.rnavarro.forofinal.MessageActivity;
 import com.rnavarro.forofinal.R;
 import com.rnavarro.forofinal.models.Foro;
+import com.rnavarro.forofinal.models.Message;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +55,10 @@ public class AdapterForo extends RecyclerView.Adapter<AdapterForo.ForoHolder> {
         holder.itemforo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i= new Intent(context,MessageActivity.class);
+                 String foro= userCollectionforos.document().getId();
+                i.putExtra("foro",foro);
+                context.startActivity(i);
             }
         });
 
