@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Foro Final</string>
+    <array name="Listado_keys">
+        <item>rojo</item>
+        <item>verde</item>
+        <item>azul</item>
+        <item>amarillo</item>
+        <item>morado</item>
+    </array>
+
+    <array name="listado">
+        <item>Rojo</item>
+        <item>Verde</item>
+        <item>Azul</item>
+        <item>Amarillo</item>
+        <item>Morado</item>
+    </array>
 </resources>

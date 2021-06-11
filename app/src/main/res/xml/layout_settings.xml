@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Preference category">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="switch_preference_1"
+            android:title="Cambiar color de las burbujas del chat"
+            app:disableDependentsState="false" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/listado"
+            android:entryValues="@array/Listado_keys"
+            android:key="list_preference_1"
+            android:title="List preference" />
+        <ListPreference
+            android:defaultValue="true"
+            android:entries="@array/listado"
+            android:entryValues="@array/Listado_keys"
+            android:key="listcolor_emisor"
+            android:title="Color burbuja de chat del emisor"
+            app:dependency="switch_preference_1" />
+    </PreferenceCategory>
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="switch_preference_1"
+        android:title="Activar Modo Oscuro" />
+</PreferenceScreen>
