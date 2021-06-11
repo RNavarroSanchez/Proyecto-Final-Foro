@@ -46,12 +46,10 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.MessageH
     @Override
     public void onBindViewHolder(@NonNull AdapterMessage.MessageHolder holder, int position) {
         final  Message message=listamessage.get(position);
-     //   String date= parseDateToddMMyyyy(message.getDate());
-       // holder.date.setText(date);
+       String date= parseDateToddMMyyyy(message.getDate().toDate());
+        holder.date.setText(date);
         holder.email.setText(message.getEmail());
         holder.message.setText(message.getMenssage());
-
-
     }
 
     @Override

@@ -7,6 +7,7 @@
         android:title="Salir"
         app:showAsAction="always" />
     <item
+        android:id="@+id/menu_ajustes"
         android:icon="@drawable/ic_baseline_settings_24"
         android:title="menu_ajustes"
         app:showAsAction="always" />

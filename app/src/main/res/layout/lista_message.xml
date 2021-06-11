@@ -7,8 +7,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerMessage"
-        android:layout_width="414dp"
-        android:layout_height="676dp"
+        android:layout_width="417dp"
+        android:layout_height="678dp"
         app:layout_constraintBottom_toTopOf="@+id/til_message"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,8 +21,8 @@
         android:id="@+id/til_message"
         android:layout_width="329dp"
         android:layout_height="56dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/fl_send"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerMessage">
 
@@ -30,7 +30,6 @@
             android:id="@+id/etMessage"
             android:layout_width="325dp"
             android:layout_height="47dp"
-            android:layout_marginBottom="13dp"
             android:hint="Message"
             android:paddingLeft="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -45,6 +44,7 @@
         android:id="@+id/fl_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

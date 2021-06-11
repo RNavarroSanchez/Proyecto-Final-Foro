@@ -56,8 +56,8 @@ public class AdapterForo extends RecyclerView.Adapter<AdapterForo.ForoHolder> {
             @Override
             public void onClick(View v) {
                 Intent i= new Intent(context,MessageActivity.class);
-                 String foro= userCollectionforos.document().getId();
-                i.putExtra("foro",foro);
+             //    String foro= userCollectionforos.document().getId();
+                i.putExtra("foro",foro.getId());
                 context.startActivity(i);
             }
         });
