@@ -1,5 +1,6 @@
 package com.rnavarro.forofinal.settings;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -16,4 +17,5 @@ public class SettingsPreferences extends PreferenceFragmentCompat {
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.layout_settings,rootKey);
     }
+
 }

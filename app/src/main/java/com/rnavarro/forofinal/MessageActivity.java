@@ -73,7 +73,7 @@ public class MessageActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         userCollectionMessages = db.collection("Foros").document(nombreforo).collection("messages");
-        userCollectionMessages.addSnapshotListener(new EventListener<QuerySnapshot>() {
+        userCollectionMessages.orderBy("date").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 messages= new ArrayList<>();
@@ -83,6 +83,7 @@ public class MessageActivity extends AppCompatActivity {
                     messages.add(message);
                 }
                 adapter.updateListMessage(messages);
+                etmensaje.setText("");
             }
         });
 

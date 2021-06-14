@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".MainActivity"/>
         <activity android:name=".MessageActivity"/>
+        <activity android:name=".settings.PreferencesActivity"/>
+        <activity android:name=".SettingsActivity"/>
     </application>
 
 
