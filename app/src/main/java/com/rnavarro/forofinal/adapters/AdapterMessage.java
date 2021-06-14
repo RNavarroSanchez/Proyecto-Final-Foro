@@ -2,8 +2,9 @@ package com.rnavarro.forofinal.adapters;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.telephony.IccOpenLogicalChannelResponse;
-import android.text.Layout;
+import android.preference.PreferenceManager;
+
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.preference.PreferenceManager;
+
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.Timestamp;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.rnavarro.forofinal.MessageActivity;
 import com.rnavarro.forofinal.R;
 import com.rnavarro.forofinal.models.Message;
 
@@ -40,7 +37,6 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.MessageH
         listamessage = new ArrayList<>();
         this.context = context;
 
-
     }
 
     @Override
@@ -54,23 +50,82 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.MessageH
     @Override
     public void onBindViewHolder(@NonNull AdapterMessage.MessageHolder holder, int position) {
         final  Message message=listamessage.get(position);
-       String date= parseDateToddMMyyyy(message.getDate().toDate());
-        holder.date.setText(date);
-        holder.email.setText(message.getEmail());
-        holder.message.setText(message.getMenssage());
-        SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(context);
 
+        String  emisor=message.getEmail();
+        LinearLayout.LayoutParams parametros= new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+
+       FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser fUser = mAuth.getCurrentUser();
+        String correo = fUser.getEmail();
+
+        SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(context);
         String colorreceptor = preferences.getString("listcolor_receptor","verde");
         String colorremisor = preferences.getString("listcolor_emisor","amarillo");
 
-        if (colorremisor.equals("morado"))
+        if(emisor.equals(correo))
         {
-            holder.laymessage.setBackgroundResource(R.color.purple_200);
+
+            String date= parseDateToddMMyyyy(message.getDate().toDate());
+            holder.date.setText(date);
+            holder.email.setText(message.getEmail());
+            holder.message.setText(message.getMenssage());
+            holder.laymessageext.setGravity(Gravity.END);
+            if (colorremisor.equals("rojo"))
+            {
+                holder.laymessage.setBackgroundResource(R.color.red);
+            }
+            else if (colorremisor.equals("verde"))
+            {
+                holder.laymessage.setBackgroundResource(R.color.teal_200);
+            }
+            else if (colorremisor.equals("azul"))
+            {
+                holder.laymessage.setBackgroundResource(R.color.blue);
+            }
+            else if (colorremisor.equals("amarillo"))
+            {
+                holder.laymessage.setBackgroundResource(R.color.yellow);
+            }
+            else if (colorremisor.equals("morado"))
+            {
+                holder.laymessage.setBackgroundResource(R.color.purple_200);
+            }
+
         }
-        else if (colorremisor.equals("verde"))
+        else
         {
-            holder.laymessage.setBackgroundResource(R.color.teal_200);
+
+            String date= parseDateToddMMyyyy(message.getDate().toDate());
+            holder.date.setText(date);
+            holder.email.setText(message.getEmail());
+            holder.message.setText(message.getMenssage());
+            holder.laymessage.setLayoutParams(parametros);
+            holder.laymessageext.setGravity(Gravity.START);
+
+            if (colorreceptor.equals("rojo"))
+            {
+                holder.laymessage.setBackgroundResource(R.color.red);
+            }
+            else if (colorreceptor.equals("verde"))
+            {
+                holder.laymessage.setBackgroundResource(R.color.teal_200);
+            }
+            else if (colorreceptor.equals("azul"))
+            {
+                holder.laymessage.setBackgroundResource(R.color.blue);
+            }
+            else if (colorreceptor.equals("amarillo"))
+            {
+                holder.laymessage.setBackgroundResource(R.color.yellow);
+            }
+            else if (colorreceptor.equals("morado"))
+            {
+                holder.laymessage.setBackgroundResource(R.color.purple_200);
+            }
+
         }
+
+
     }
 
     @Override
@@ -89,6 +144,8 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.MessageH
         private final TextView date;
         private final TextView message;
         private final LinearLayout laymessage;
+        private final LinearLayout laymessageext;
+
 
 
         public MessageHolder(@NonNull View itemView) {
@@ -96,7 +153,9 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.MessageH
             email= itemView.findViewById(R.id.tv_email);
             date=itemView.findViewById(R.id.tv_date);
             message=itemView.findViewById(R.id.tv_mensaje);
-            laymessage=itemView.findViewById(R.id.lymesgge);
+            laymessage=itemView.findViewById(R.id.lymesggedentro);
+            laymessageext=itemView.findViewById(R.id.lymesgge);
+
 
         }
     }

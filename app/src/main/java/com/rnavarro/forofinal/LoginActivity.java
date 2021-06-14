@@ -100,17 +100,16 @@ public class LoginActivity extends AppCompatActivity
         {
             return;
         }
-
-
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>()
         {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task)
             {
-
                 if (task.isSuccessful())
                 {
                     FirebaseUser user = mAuth.getCurrentUser();
+                    
+
                     startMain();
                 } else {
                     Toast.makeText(LoginActivity.this, "Login error", Toast.LENGTH_SHORT).show();
@@ -118,15 +117,12 @@ public class LoginActivity extends AppCompatActivity
             }
         });
     }
-
     private void createAccount(String email, String password)
     {
         if (!validateForm(email, password))
         {
             return;
         }
-
-
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>()
         {
             @Override
@@ -136,7 +132,7 @@ public class LoginActivity extends AppCompatActivity
                 if (task.isSuccessful())
                 {
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                            .setDisplayName("First User").build();
+                            .setDisplayName(email).build();
                     FirebaseUser user = mAuth.getCurrentUser();
                     if (user != null)
                         user.updateProfile(profileUpdates);
