@@ -1,8 +1,10 @@
 package com.rnavarro.forofinal;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -18,12 +20,20 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.messaging.Constants;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
+
+import org.jetbrains.annotations.NotNull;
 
 public class LoginActivity extends AppCompatActivity
 {
+    private static final String DB_USER_TOKEN=" ";
+
     private FirebaseAuth mAuth;
     private TextInputEditText ET_Email;
     private TextInputEditText ET_Passsword;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -111,6 +121,7 @@ public class LoginActivity extends AppCompatActivity
                     
 
                     startMain();
+
                 } else {
                     Toast.makeText(LoginActivity.this, "Login error", Toast.LENGTH_SHORT).show();
                 }
@@ -134,12 +145,31 @@ public class LoginActivity extends AppCompatActivity
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                             .setDisplayName(email).build();
                     FirebaseUser user = mAuth.getCurrentUser();
+
                     if (user != null)
                         user.updateProfile(profileUpdates);
                     sendEmail();
                 } else {
                     Toast.makeText(LoginActivity.this, "Registration error", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+    }
+
+    private void registrarToken(FirebaseUser user)
+    {
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<String> task) {
+                if(!task.isSuccessful()){
+                   // Log.w(TAG,"fetching FCM registration token failed",task.getException());
+                    return;
+                }
+                String token = task.getResult();
+
+                SharedPreferences.Editor editor= preferences.edit();
+                editor.putString(DB_USER_TOKEN,token);
+                editor.apply();
             }
         });
     }
