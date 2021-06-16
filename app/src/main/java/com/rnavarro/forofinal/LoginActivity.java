@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 public class LoginActivity extends AppCompatActivity
 {
     private static final String DB_USER_TOKEN=" ";
-
+    private static final String TAG="Login Activity";
     private FirebaseAuth mAuth;
     private TextInputEditText ET_Email;
     private TextInputEditText ET_Passsword;
@@ -38,6 +39,7 @@ public class LoginActivity extends AppCompatActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
+        preferences= PreferenceManager.getDefaultSharedPreferences(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
         mAuth = FirebaseAuth.getInstance();
@@ -73,6 +75,7 @@ public class LoginActivity extends AppCompatActivity
         if (currentUser != null)
         {
             // De este modo si ya nos hemos logueado 1 vez ya no habria que pasar por esta pantalla al entrar en la App
+            registrarToken(currentUser);
             startMain();
 
             //Con esta accion estamos haciendo que si ya estamos logueados, nos vuelva a pedir los datos, si quitamos el comentario de startMain(); entraria directo a MainActivity
@@ -118,7 +121,8 @@ public class LoginActivity extends AppCompatActivity
                 if (task.isSuccessful())
                 {
                     FirebaseUser user = mAuth.getCurrentUser();
-                    
+
+                    registrarToken(user);
 
                     startMain();
 
@@ -162,11 +166,10 @@ public class LoginActivity extends AppCompatActivity
             @Override
             public void onComplete(@NonNull @NotNull Task<String> task) {
                 if(!task.isSuccessful()){
-                   // Log.w(TAG,"fetching FCM registration token failed",task.getException());
+                   Log.w(TAG,"fetching FCM registration token failed",task.getException());
                     return;
                 }
                 String token = task.getResult();
-
                 SharedPreferences.Editor editor= preferences.edit();
                 editor.putString(DB_USER_TOKEN,token);
                 editor.apply();

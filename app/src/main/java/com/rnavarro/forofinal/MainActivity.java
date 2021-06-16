@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     String nombreforo;
     private EditText etNombreforo;
     private FirebaseAuth mAuth;
+    private static final String CHANNEL_ID="5";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser fUser = mAuth.getCurrentUser();
+        createNotificationChannel();
 
 
         db = FirebaseFirestore.getInstance();
@@ -152,6 +157,16 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(mItem);
     }
-
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Canal Foro";
+            String description = "Descripcion Foro";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 
 }
