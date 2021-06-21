@@ -30,8 +30,8 @@ public class MyFirebaseMessagingService  extends FirebaseMessagingService {
         {
           Log.d(TAG, "Datos del mensaje: " + remoteMessage.getData());
             Map<String,String> datos= remoteMessage.getData();
-            String titulo = datos.get("title");
-            String body = datos.get("body");
+            String titulo = datos.get("titulo");
+            String body = datos.get("mensaje");
             String fecha = datos.get("fecha");
             sendNotification(titulo,body,fecha);
         }

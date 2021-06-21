@@ -66,6 +66,7 @@ public class MessageActivity extends AppCompatActivity {
     private Timestamp currentDateandTime;
     private String correo;
     private CollectionReference userCollectionToken;
+    private String messagesend;
 
 
     @Override
@@ -141,7 +142,7 @@ public class MessageActivity extends AppCompatActivity {
                 for(DocumentSnapshot document:queryDocumentSnapshots)
                 {
                     Map<String,Object> map =document.getData();
-                    tokens.add((String)map.get("token"));
+                    tokens.add((String)map.get("idtoken"));
                 }
                 sendNotiReal(title,msg,tokens);
             }
@@ -151,6 +152,7 @@ public class MessageActivity extends AppCompatActivity {
     {
         SimpleDateFormat simpleDateFormat= new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
         String fecha= simpleDateFormat.format(new Date());
+
         NotiMensaje notimensaje= new NotiMensaje(msg,title,fecha);
         Notification notif= new Notification(token,notimensaje);
         Retrofit retrofit= new Retrofit.Builder().baseUrl(MyClient.BASE_URL)
@@ -177,8 +179,7 @@ public class MessageActivity extends AppCompatActivity {
 
     private void guardarMessage()
     {
-      String messagesend=etmensaje.getText().toString();
-
+        messagesend=etmensaje.getText().toString();
         if(!messagesend.isEmpty())
         {
             Message message = new Message(currentDateandTime,correo,messagesend,"makea");
@@ -186,7 +187,7 @@ public class MessageActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
                     Toast.makeText(MessageActivity.this, "Añadido! ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
-                   sendNotificationMessage(correo,messagesend);
+                    sendNotificationMessage(correo,messagesend);
                 }
             });
         }
